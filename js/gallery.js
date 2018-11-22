@@ -84,7 +84,7 @@ function eventSet(){
 
 var firstChk = true;
 var pageNum = 0;
-var imageArr = ["./image/img0.jpg","./image/img1.jpg","./image/img2.jpg","./image/img3.jpg"];
+var imageArr = ["./image/img0.JPG","./image/img1.JPG","./image/img2.JPG","./image/img3.JPG"];
 // imageArr[0] = "https://user-images.githubusercontent.com/33676016/48886800-a19d7980-ee70-11e8-9ee3-81fc50a658b8.JPG";
 // imageArr[1] = "https://user-images.githubusercontent.com/33676016/48886812-aa8e4b00-ee70-11e8-9960-878924023389.JPG";
 // imageArr[2] = "https://user-images.githubusercontent.com/33676016/48886814-aa8e4b00-ee70-11e8-99e4-58e0d12c38a3.JPG";
