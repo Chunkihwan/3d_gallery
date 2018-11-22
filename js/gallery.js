@@ -84,7 +84,11 @@ function eventSet(){
 
 var firstChk = true;
 var pageNum = 0;
-var imageArr = ["img0.jpg","img1.jpg","img2.jpg","img3.jpg"];
+var imageArr = [];//["img0.jpg","img1.jpg","img2.jpg","img3.jpg"];
+imageArr[0] = "https://user-images.githubusercontent.com/33676016/48886800-a19d7980-ee70-11e8-9ee3-81fc50a658b8.JPG";
+imageArr[1] = "https://user-images.githubusercontent.com/33676016/48886812-aa8e4b00-ee70-11e8-9960-878924023389.JPG";
+imageArr[2] = "https://user-images.githubusercontent.com/33676016/48886814-aa8e4b00-ee70-11e8-99e4-58e0d12c38a3.JPG";
+imageArr[3] = "https://user-images.githubusercontent.com/33676016/48886815-aa8e4b00-ee70-11e8-8cfe-958c6fffde10.JPG";
 var forNum = 56;
 var xlenght  = 7;
 var yNum = 0;
@@ -111,8 +115,7 @@ function addCubeFunc(){
     //     boxGroup.remove(boxGroup.children[i]);
     // }
     // scene.remove( boxGroup );
-
-	imageLoader.load("./image/"+imageArr[pageNum], function(data){
+	imageLoader.load(imageArr[pageNum], function(data){
 
         motoinChk = false;
         var type = typeArr[Math.round(Math.random()*(typeArr.length-1))];
