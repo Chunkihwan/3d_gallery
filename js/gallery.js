@@ -84,17 +84,17 @@ function eventSet(){
 
 var firstChk = true;
 var pageNum = 0;
-var imageArr = [];//["img0.jpg","img1.jpg","img2.jpg","img3.jpg"];
-imageArr[0] = "https://user-images.githubusercontent.com/33676016/48886800-a19d7980-ee70-11e8-9ee3-81fc50a658b8.JPG";
-imageArr[1] = "https://user-images.githubusercontent.com/33676016/48886812-aa8e4b00-ee70-11e8-9960-878924023389.JPG";
-imageArr[2] = "https://user-images.githubusercontent.com/33676016/48886814-aa8e4b00-ee70-11e8-99e4-58e0d12c38a3.JPG";
-imageArr[3] = "https://user-images.githubusercontent.com/33676016/48886815-aa8e4b00-ee70-11e8-8cfe-958c6fffde10.JPG";
+var imageArr = ["./image/img0.jpg","./image/img1.jpg","./image/img2.jpg","./image/img3.jpg"];
+// imageArr[0] = "https://user-images.githubusercontent.com/33676016/48886800-a19d7980-ee70-11e8-9ee3-81fc50a658b8.JPG";
+// imageArr[1] = "https://user-images.githubusercontent.com/33676016/48886812-aa8e4b00-ee70-11e8-9960-878924023389.JPG";
+// imageArr[2] = "https://user-images.githubusercontent.com/33676016/48886814-aa8e4b00-ee70-11e8-99e4-58e0d12c38a3.JPG";
+// imageArr[3] = "https://user-images.githubusercontent.com/33676016/48886815-aa8e4b00-ee70-11e8-8cfe-958c6fffde10.JPG";
 var forNum = 56;
 var xlenght  = 7;
 var yNum = 0;
 var size = 6;    
 var plusNum = 1;
-var motoinChk = true;
+// var motoinChk = true;
 var typeArr= [];
 typeArr[0] = [false, false, 85, false];
 typeArr[1] = [false, true, 45, true];
@@ -108,62 +108,63 @@ function addCubeFunc(){
     boxGroup.position.y = (xlenght * (size+2))/2
     //reset
     renderer.setClearColor( Math.random() * 0xffffff );
-    motoinChk = true;
+
     yNum = 1;
+    // var material;
+    var material  = new THREE.MeshPhongMaterial({ color:Math.random() * 0xffffff });
 
-    // for (var i = boxGroup.children.length - 1; i >= 0; i--) {
-    //     boxGroup.remove(boxGroup.children[i]);
-    // }
-    // scene.remove( boxGroup );
 	imageLoader.load(imageArr[pageNum], function(data){
-
-        motoinChk = false;
-        var type = typeArr[Math.round(Math.random()*(typeArr.length-1))];
-
-		var material  = new THREE.MeshPhongMaterial({ map : data })
-		for ( var i = 0; i < forNum; i ++ ) {
-            if(firstChk) {
-                var geometry = new THREE.BoxBufferGeometry( size, size, size );
-                boxMesh = new THREE.Mesh( geometry, material );
-                boxMesh.castShadow = true;
-                boxMesh.receiveShadow = true;
-                
-                boxGroup.add( boxMesh );
-                scene.add( boxGroup );
-            }else{
-                boxMesh = boxGroup.children[i];
-                boxMesh.material = material;
-            }
-            boxMesh.rnum = type[0] == true ? (Math.random() * 0.01)+0.005  : 0;
-            var sizeNum = type[3] == true ? (Math.random() * 1)  : 1;
-            TweenMax.to( boxMesh.scale , Math.random()*plusNum+1 , {
-                x : sizeNum
-                ,y : sizeNum
-                ,z : sizeNum
-                ,delay : Math.random() * 1
-                ,ease: Power2.easeInOut
-            });
-
-            TweenMax.to( boxMesh.rotation , Math.random()*plusNum+1 , {
-                x : boxMesh.rnum
-                ,y : boxMesh.rnum
-                ,z : boxMesh.rnum
-                ,delay : Math.random() * 1
-                ,ease: Power2.easeInOut
-            });
-
-            TweenMax.to( boxMesh.position , firstChk ? 0 : Math.random()*plusNum+1 , {
-                x : (i%xlenght) * (size+plusNum)
-                ,y : -(yNum * (size+plusNum))
-                ,z : type[1] == true ? Math.round((Math.random() * 50) - 25) : 0
-                ,delay : firstChk ? 0 : Math.random() * 1
-                ,ease: Power2.easeInOut
-            });
-
-            if(i%xlenght == xlenght-1) yNum ++;
+        material = new THREE.MeshPhongMaterial({ map : data })
+        for ( var i = 0; i < boxGroup.children.length; i ++ ) {
+            boxMesh = boxGroup.children[i];
+            boxMesh.material = material;
         }
-        firstChk = false;
-    });
+    })
+    var type = typeArr[Math.round(Math.random()*(typeArr.length-1))];
+
+    for ( var i = 0; i < forNum; i ++ ) {
+        if(firstChk) {
+            var geometry = new THREE.BoxBufferGeometry( size, size, size );
+            boxMesh = new THREE.Mesh( geometry, material );
+            boxMesh.castShadow = true;
+            boxMesh.receiveShadow = true;
+            
+            boxGroup.add( boxMesh );
+            scene.add( boxGroup );
+        }else{
+            boxMesh = boxGroup.children[i];
+            boxMesh.material = material;
+        }
+        boxMesh.rnum = type[0] == true ? (Math.random() * 0.01)+0.005  : 0;
+        var sizeNum = type[3] == true ? (Math.random() * 1)  : 1;
+        TweenMax.to( boxMesh.scale , Math.random()*plusNum+1 , {
+            x : sizeNum
+            ,y : sizeNum
+            ,z : sizeNum
+            ,delay : Math.random() * 1
+            ,ease: Power2.easeInOut
+        });
+
+        TweenMax.to( boxMesh.rotation , Math.random()*plusNum+1 , {
+            x : boxMesh.rnum
+            ,y : boxMesh.rnum
+            ,z : boxMesh.rnum
+            ,delay : Math.random() * 1
+            ,ease: Power2.easeInOut
+        });
+
+        TweenMax.to( boxMesh.position , firstChk ? 0 : Math.random()*plusNum+.5 , {
+            x : (i%xlenght) * (size+plusNum)
+            ,y : -(yNum * (size+plusNum))
+            ,z : type[1] == true ? Math.round((Math.random() * 50) - 25) : 0
+            ,delay : firstChk ? 0 : Math.random() * 1
+            ,ease: Power2.easeInOut
+        });
+
+        if(i%xlenght == xlenght-1) yNum ++;
+    }
+    firstChk = false;
+    // });
     TweenMax.to(camera, 5, { 
         fov:  typeArr[pageNum][2]
         ,ease: Expo.easeOut
