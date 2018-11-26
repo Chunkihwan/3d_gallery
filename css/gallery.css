@@ -134,9 +134,6 @@ button {
 	텍스트 관련
 */
 /* 
-	삼각형 만들기 
-*/
-/* 
 	CSS3 효과
 	=====
 	example)
@@ -169,6 +166,12 @@ button {
   top: 50px;
   right: 50px;
   z-index: 1000;
+}
+@media only screen and (max-width: 768px) {
+  .btnWrap {
+    top: 14px;
+    right: 14px;
+  }
 }
 .btnWrap button {
   width: 50px;

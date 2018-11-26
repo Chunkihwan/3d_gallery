@@ -30,41 +30,6 @@
 	color: transparent !important;
 }
 
-/* 
-	삼각형 만들기 
-*/
-.triangle(@weight, @color, @direction, @top:auto, @right:auto, @bottom:auto, @left:auto) when (@direction=top) {
-  position:absolute;
-  top:@top; left:@left; right:@right; bottom:@bottom;
-  width:0;height:0;
-  border-bottom:@weight solid @color;
-  border-right:@weight solid transparent;
-  border-left:@weight solid transparent;
-}
-.triangle(@weight, @color, @direction, @top:auto, @right:auto, @bottom:auto, @left:auto) when (@direction=right) {
-  position:absolute;
-  top:@top; left:@left; right:@right; bottom:@bottom;
-  width:0;height:0;
-  border-left:@weight solid @color;
-  border-top:@weight solid transparent;
-  border-bottom:@weight solid transparent;
-}
-.triangle(@weight, @color, @direction, @top:auto, @right:auto, @bottom:auto, @left:auto) when (@direction=bottom) {
-  position:absolute;
-  top:@top; left:@left; right:@right; bottom:@bottom;
-  width:0;height:0;
-  border-top:@weight solid @color;
-  border-right:@weight solid transparent;
-  border-left:@weight solid transparent;
-}
-.triangle(@weight, @color, @direction, @top:auto, @right:auto, @bottom:auto, @left:auto) when (@direction=left) {
-  position:absolute;
-  top:@top; left:@left; right:@right; bottom:@bottom;
-  width:0;height:0;
-  border-right:@weight solid @color;
-  border-bottom:@weight solid transparent;
-  border-top:@weight solid transparent;
-}
 
 /* 
 	CSS3 효과
@@ -80,11 +45,6 @@
 	-moz-box-shadow: @shadow;
 	box-shadow: @shadow;
 }
-// .box-shadow(@shadow, @shadow) {
-// 	-webkit-box-shadow: @shadow, @shadow;
-// 	-moz-box-shadow: @shadow, @shadow;
-// 	box-shadow: @shadow, @shadow;
-// }
 
 .blur (@blur : 10px) {
 	-webkit-filter: blur(@blur);
@@ -97,40 +57,6 @@
 	-webkit-border-radius: @radius;
 	-moz-border-radius: @radius;
 	border-radius:@radius;
-}
-.gradient(@start: #EEE, @stop: #F5F5F5) {
-	background: @stop;
-	background: -moz-linear-gradient(top, @start 0%, @stop 100%);
-	background: -webkit-gradient(linear,left bottom,left top,color-stop(0, @start),color-stop(1, @stop));
-	background: -webkit-linear-gradient(top, @start 0%, @stop 100%);
-	background: -o-linear-gradient(top, @start 0%, @stop 100%);
-	background: -ms-linear-gradient(top, @start 0%, @stop 100%);
-	background: linear-gradient(to bottom, @start 0%, @stop 100%);
-}
-.gradient-half(@color: #f0f0f0, @start: #fff, @half1:#fff, @half2:#f0f0f0, @stop: #f0f0f0){
-	background: @color;
-	background: -moz-linear-gradient(top,  @start 0%,  @half1 50%,  @half2 50%,  @stop 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@start), color-stop(50%, @half1), color-stop(50%, @half2), color-stop(100%, @stop));
-	background: -webkit-linear-gradient(top,  @start 0%, @half1 50%, @half2 50%, @stop 100%);
-	background: -o-linear-gradient(top,  @start 0%, @half1 50%, @half2 50%, @stop 100%);
-	background: -ms-linear-gradient(top,  @start 0%, @half1 50%, @half2 50%, @stop 100%);
-	background: linear-gradient(to bottom,  @start 0%, @half1 50%, @half2 50%, @stop 100%);
-}
-.text-shadow(@shadow) {
-	-webkit-text-shadow: @shadow;
-	-moz-text-shadow: @shadow;
-	text-shadow: @shadow;
-}
-// .background-cover(@imgsrc) {
-// 	background-size: cover;
-// 	filter: ~"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.@{imgsrc}', sizingMethod='scale')";
-// 	-ms-filter: ~'progid:DXImageTransform.Microsoft.AlphaImageLoader(src="@{imgsrc}", sizingMethod="scale")"';
-// }
-.backface(@hidden:hidden) {
-	-webkit-backface-visibility:@hidden;
-	-moz-backface-visibility:@hidden;
-	-ms-backface-visibility:@hidden;
-	backface-visibility:@hidden;
 }
 
 .border-box() {
@@ -215,58 +141,12 @@
 @desktop-xl:  ~"only screen and (min-width: 1129px)";
 
 
-
-.background-cover() {
-    -webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-    -ms-background-size: cover;
-	background-size: cover;
-//    -ms-interpolation-mode: bicubic;
-}
-
 .opacity (@opacity) {
     opacity: @opacity;
     -webkit-opacity: 	@opacity;
 	-moz-opacity: 		@opacity;
     -ms-filter: ~`"progid:DXImageTransform.Microsoft.Alpha(opacity=(" + "@{opacity}" * 100 + "))"`; 
     filter: ~`"alpha(opacity = (" + "@{opacity}" * 100 + "))"`;
-}
-
-
-.border-radius-custom (@topleft: 5px, @topright: 5px, @bottomleft: 5px, @bottomright: 5px) {
-	-webkit-border-radius: @topleft @topright @bottomright @bottomleft;
-	-moz-border-radius: @topleft @topright @bottomright @bottomleft;
-    -ms-border-radius: @topleft @topright @bottomright @bottomleft;
-    -o-border-radius: @topleft @topright @bottomright @bottomleft;
-	border-radius: @topleft @topright @bottomright @bottomleft;
-}
-//.border-radius-custom(20px, 20px, 0px, 0px);
-
-
-//선택영역 컬러변
-.selection(@color; @bg) {
-	::selection {
-		//-webkit-font-smoothing: antialiased;
-		color: @color;
-		//text-shadow: none;
-		background: @bg;
-		//background: fadeout(@bg, 1%);
-	}
-	::-moz-selection {
-		//-webkit-font-smoothing: antialiased;
-		color: @color;
-		//text-shadow: none;
-		background: @bg;
-		//background: fadeout(@bg, 1%);
-	}
-}
-//.selection(#fff; #000);
-
-.bg-sprite(@x: 0, @y: 0, @width: 0, @height: 0) {
-	background-position: @x @y;
-	width: @width;
-	height: @height;
 }
 
 .box-sizing() {

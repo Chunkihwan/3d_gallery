@@ -85,16 +85,11 @@ function eventSet(){
 var firstChk = true;
 var pageNum = 0;
 var imageArr = ["./image/img0.JPG","./image/img1.JPG","./image/img2.JPG","./image/img3.JPG"];
-// imageArr[0] = "https://user-images.githubusercontent.com/33676016/48886800-a19d7980-ee70-11e8-9ee3-81fc50a658b8.JPG";
-// imageArr[1] = "https://user-images.githubusercontent.com/33676016/48886812-aa8e4b00-ee70-11e8-9960-878924023389.JPG";
-// imageArr[2] = "https://user-images.githubusercontent.com/33676016/48886814-aa8e4b00-ee70-11e8-99e4-58e0d12c38a3.JPG";
-// imageArr[3] = "https://user-images.githubusercontent.com/33676016/48886815-aa8e4b00-ee70-11e8-8cfe-958c6fffde10.JPG";
 var forNum = 56;
 var xlenght  = 7;
 var yNum = 0;
 var size = 6;    
 var plusNum = 1;
-// var motoinChk = true;
 var typeArr= [];
 typeArr[0] = [false, false, 85, false];
 typeArr[1] = [false, true, 45, true];
@@ -106,18 +101,22 @@ function addCubeFunc(){
     
     boxGroup.position.x = -( (xlenght-1) * (size+2))/2
     boxGroup.position.y = (xlenght * (size+2))/2
-    //reset
     renderer.setClearColor( Math.random() * 0xffffff );
-
     yNum = 1;
-    // var material;
-    var material  = new THREE.MeshPhongMaterial({ color:Math.random() * 0xffffff });
-
-	imageLoader.load(imageArr[pageNum], function(data){
-        material = new THREE.MeshPhongMaterial({ map : data })
+    var _material  = new THREE.MeshPhongMaterial({ color:Math.random() * 0xffffff });
+    
+    imageLoader.load(imageArr[pageNum], function(data){
+        _material = new THREE.MeshPhongMaterial({ map : data })
         for ( var i = 0; i < boxGroup.children.length; i ++ ) {
             boxMesh = boxGroup.children[i];
-            boxMesh.material = material;
+            boxMesh.material = _material;
+
+            var repeatNum = Math.ceil(Math.random()*3);
+            data.repeat.set( repeatNum, repeatNum );
+            data.wrapS = THREE.RepeatWrapping;
+            data.wrapT = THREE.RepeatWrapping;
+
+            // transformUv 
         }
     })
     var type = typeArr[Math.round(Math.random()*(typeArr.length-1))];
@@ -125,7 +124,7 @@ function addCubeFunc(){
     for ( var i = 0; i < forNum; i ++ ) {
         if(firstChk) {
             var geometry = new THREE.BoxBufferGeometry( size, size, size );
-            boxMesh = new THREE.Mesh( geometry, material );
+            boxMesh = new THREE.Mesh( geometry, _material );
             boxMesh.castShadow = true;
             boxMesh.receiveShadow = true;
             
@@ -133,7 +132,7 @@ function addCubeFunc(){
             scene.add( boxGroup );
         }else{
             boxMesh = boxGroup.children[i];
-            boxMesh.material = material;
+            boxMesh.material = _material;
         }
         boxMesh.rnum = type[0] == true ? (Math.random() * 0.01)+0.005  : 0;
         var sizeNum = type[3] == true ? (Math.random() * 1)  : 1;
@@ -164,7 +163,7 @@ function addCubeFunc(){
         if(i%xlenght == xlenght-1) yNum ++;
     }
     firstChk = false;
-    // });
+
     TweenMax.to(camera, 5, { 
         fov:  typeArr[pageNum][2]
         ,ease: Expo.easeOut
